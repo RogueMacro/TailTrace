@@ -1,0 +1,10 @@
+FileVersion = 1
+
+[Dependencies]
+corlib = "*"
+
+[Project]
+Name = "TailTrace"
+TargetType = "BeefLib"
+StartupObject = "TailTrace.Program"
+ProcessorMacros = ["FEATURE_MUTING"]
