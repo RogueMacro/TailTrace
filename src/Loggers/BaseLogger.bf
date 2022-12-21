@@ -4,11 +4,11 @@ namespace TailTrace.Loggers
 {
 	abstract class BaseLogger : ILogger
 	{
-		public String Format => CustomFormat.Get("[%q1] %x");
-		private Result<String> CustomFormat = .Err ~ if (_ case .Ok(let val)) delete val;
+		public virtual String Format => CustomFormat.Get("[%q1] %x");
+		protected Result<String> CustomFormat = .Err ~ if (_ case .Ok(let val)) delete val;
 
 		public LogLevel Level => MinLevel;
-		private LogLevel MinLevel = .Info;
+		protected LogLevel MinLevel = .Info;
 
 		public void SetFormat(StringView format)
 		{
