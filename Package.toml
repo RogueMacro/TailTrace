@@ -1,7 +1,7 @@
 [Package]
 Name = "TailTrace"
 Version = "0.1.0"
-Description = ""
+Description = "Logging and console style utilities"
 
 [Features]
 Muting = []
