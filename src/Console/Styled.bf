@@ -5,21 +5,15 @@ namespace TailTrace.Console
 {
 	static
 	{
-		public static StyledObject Styled<T>(T val) where T : class
+		public static StyledObject<T> Styled<T>(T val)
 		{
-			return [Friend]StyledObject(val, false);
-		}
-
-		public static StyledObject Styled<T>(T val) where T : struct
-		{
-			return [Friend]StyledObject(new box val, true);
+			return StyledObject<T>(val);
 		}
 	}
 
-	struct StyledObject : IDisposable
+	struct StyledObject<T>
 	{
-		private Object Object;
-		private bool OwnsObject = false;
+		private T Object;
 
 		private Result<Color> Foreground = .Err;
 		private Result<Color> Background = .Err;
@@ -29,10 +23,9 @@ namespace TailTrace.Console
 
 		private ConsoleAttribute Attributes = .None;
 
-		private this(Object object, bool ownsObject)
+		public this(T object)
 		{
 			Object = object;
-			OwnsObject = ownsObject;
 		}
 
 		public void Black() mut =>   Foreground = .Ok(.Black);
@@ -104,16 +97,11 @@ namespace TailTrace.Console
 				}
 			}
 
+			
 			Object.ToString(strBuffer);
 
 			if (reset)
 				strBuffer.Append("\x1b[0m");
-		}
-
-		public void Dispose()
-		{
-			if (OwnsObject)
-				delete Object;
 		}
 	}
 

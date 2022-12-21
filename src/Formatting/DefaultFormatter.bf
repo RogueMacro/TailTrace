@@ -69,11 +69,11 @@ namespace TailTrace.Formatting
 	{
 		public bool UseStyles = true;
 
-		public StyledObject TraceStyle = Styled(LogLevel.Trace)..White() ~ _.Dispose();
-		public StyledObject DebugStyle = Styled(LogLevel.Debug)..Cyan()..Bright() ~ _.Dispose();
-		public StyledObject InfoStyle = Styled(LogLevel.Info)..Cyan() ~ _.Dispose();
-		public StyledObject WarningStyle = Styled(LogLevel.Warning)..Yellow() ~ _.Dispose();
-		public StyledObject ErrorStyle = Styled(LogLevel.Error)..Red()..Bright() ~ _.Dispose();
+		public String TraceStyled   = Styled(LogLevel.Trace)                    .ToString(.. new .()) ~ delete _;
+		public String DebugStyled   = Styled(LogLevel.Debug)  ..Cyan()..Bright().ToString(.. new .()) ~ delete _;
+		public String InfoStyled    = Styled(LogLevel.Info)   ..Cyan()          .ToString(.. new .()) ~ delete _;
+		public String WarningStyled = Styled(LogLevel.Warning)..Yellow()        .ToString(.. new .()) ~ delete _;
+		public String ErrorStyled   = Styled(LogLevel.Error)  ..Red()..Bright() .ToString(.. new .()) ~ delete _;
 
 		public void Format(LogLevel level, StringView module, StringView format, StringView message, String strBuffer)
 		{
@@ -121,15 +121,15 @@ namespace TailTrace.Formatting
 							switch (level)
 							{
 							case .Trace:
-								strBuffer.Append(TraceStyle);
+								strBuffer.Append(TraceStyled);
 							case .Debug:
-								strBuffer.Append(DebugStyle);
+								strBuffer.Append(DebugStyled);
 							case .Info:
-								strBuffer.Append(InfoStyle);
+								strBuffer.Append(InfoStyled);
 							case .Warning:
-								strBuffer.Append(WarningStyle);
+								strBuffer.Append(WarningStyled);
 							case .Error:
-								strBuffer.Append(ErrorStyle);
+								strBuffer.Append(ErrorStyled);
 							}
 						}
 						else
@@ -178,15 +178,15 @@ namespace TailTrace.Formatting
 							switch (level)
 							{
 							case .Trace:
-								strBuffer.AppendF(appendFmt, TraceStyle);
+								strBuffer.AppendF(appendFmt, TraceStyled);
 							case .Debug:
-								strBuffer.AppendF(appendFmt, DebugStyle);
+								strBuffer.AppendF(appendFmt, DebugStyled);
 							case .Info:
-								strBuffer.AppendF(appendFmt, InfoStyle);
+								strBuffer.AppendF(appendFmt, InfoStyled);
 							case .Warning:
-								strBuffer.AppendF(appendFmt, WarningStyle);
+								strBuffer.AppendF(appendFmt, WarningStyled);
 							case .Error:
-								strBuffer.AppendF(appendFmt, ErrorStyle);
+								strBuffer.AppendF(appendFmt, ErrorStyled);
 							}
 						}
 						else
